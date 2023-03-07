@@ -16,20 +16,25 @@
 <div class="secured-container">
     <nav class="navbar">
         <a th:href="@{/category(size=${advertisements.size}, page=1)}">
-            <i class="fab fa-twitter fa-3x" style="color: red;"></i>
+            <i class="fab fa-twitter fa-3x" style="color: coral;"></i>
             OGŁOSZENIA
         </a>
-
         <a class="login-button" sec:authorize="isAuthenticated()"
            th:text="|Dodaj ogłoszenie|"
            th:href="@{/add}">Dodaj ogłoszenie</a>
-
-        <form action="#" th:action="@{/search}" method="get">
-            <input type="text" name="title"/>
-            <input type="hidden" name="page" value="0"/>
-            <input type="submit" value="SEARCH"/>
+        <form action="#" th:action="@{/search(size=${advertisements.size}, page=1)}" th:method="get">
+            <div class="input-group">
+                <input type="text" name="title" class="form-control" placeholder="Search"/>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i> SEARCH
+                    </button>
+                </div>
+                <input type="hidden" name="size" th:value="${advertisements.size}"/>
+                <input type="hidden" name="page" value="1"/>
+            </div>
         </form>
-
+        <div th:include="szablon/toggle-button"></div>
         <a class="login-button" sec:authorize="isAuthenticated()"
            th:text="|Wyloguj się|"
            th:href="@{/logout}">Wyloguj się</a>
@@ -86,5 +91,5 @@
     <footer>Ogłoszenia</footer>
 </div>
 </body>
-
+<script src="/js/main.js"></script>
 </html>

@@ -1,8 +1,6 @@
 package pl.pb.ogloszeniadrobne.controller;
 
-import lombok.AllArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,11 +18,14 @@ import java.nio.file.Paths;
 import java.util.Optional;
 
 @Controller
-@AllArgsConstructor
 public class UploadFileController {
-
-    private AdvertisementService advertisementService;
     public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/src/main/resources/static/img";
+    private final AdvertisementService advertisementService;
+
+    @Autowired
+    public UploadFileController(AdvertisementService advertisementService) {
+        this.advertisementService = advertisementService;
+    }
 
     @GetMapping("/uploadimage/{id}")
     public String displayUploadForm(@PathVariable Long id, Model model) {

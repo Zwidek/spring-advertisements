@@ -25,5 +25,7 @@ VALUES ('Ksiazka o programowaniu', 'allegro.pl', 100.99, 'Dedykowana dla osób p
        ('Burak', 'allegro.pl', 10.00, 'Czerwony', '2022-12-31', 2, 2, 0),
        ('Pietruszka', 'allegro.pl', 6.50, 'Zielona', '2023-01-15', 2, 2, 0),
        ('Jablko', 'allegro.pl', 4.99, 'Champion', '2023-01-15', 2, 3, 0),
-       ('Malina', 'allegro.pl', 21.99, 'Słodka', '2023-02-15', 2, 3, 0);
+       ('Malina', 'allegro.pl', 21.99, 'Słodka', '2023-02-15', 2, 3, 0),
+       ('Jablko', 'allegro.pl', 5.99, 'Słodka', '2023-02-15', 2, 3, 0),
+       ('Marchewka', 'allegro.pl', 1.99, 'Słodka', '2023-02-15', 2, 2, 0);
 

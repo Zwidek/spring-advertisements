@@ -14,7 +14,7 @@ public interface AdvertisementRepository extends JpaRepository<Advertisement, Lo
     List<Advertisement> findAllByCategoryId(Long id);
 
     @Query("Select c from Advertisement c where lower(c.title) like lower(concat('%', ?1,'%'))")
-    List<Advertisement> findAdvertisementByTitle(String title, Pageable page);
+    List<Advertisement> findAdvertisementByTitle(String title);
 
     Optional<Advertisement> findAdvertisementByUserEmailIsContainingIgnoreCase(String userName);
 

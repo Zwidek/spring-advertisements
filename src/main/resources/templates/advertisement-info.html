@@ -2,14 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>s</title>
+    <title>advertisement-info</title>
+    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <img width="200" th:src="@{'/img/' + ${advertisement.get().url} + '.jpg'}"/>
-    <p th:text="${advertisement.get().title}"></p>
-    <p th:text="${advertisement.get().description}"></p>
-    <p th:text="${advertisement.get().price}"></p>
-    <p th:text="${advertisement.get().category.getName()}"></p>
-    <p th:text="${advertisement.get().viewCounter}"></p>
+<div th:include="szablon/toggle-button"></div>
+<img width="200" th:src="@{'/img/' + ${advertisement.get().url} + '.jpg'}"/>
+<p th:text="${advertisement.get().title}"></p>
+<p th:text="${advertisement.get().description}"></p>
+<p th:text="${advertisement.get().price}"></p>
+<p th:text="${advertisement.get().category.getName()}"></p>
+<p th:text="${advertisement.get().viewCounter}"></p>
 </body>
+<script src="/js/main.js"></script>
 </html>

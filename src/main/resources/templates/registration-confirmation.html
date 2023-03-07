@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="https://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Rejestracja zakończona</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}" />
+    <meta charset="UTF-8">
+    <title>Rejestracja zakończona</title>
+    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
+<div th:include="szablon/toggle-button"></div>
 <div class="container">
-  <i class="fa-regular fa-face-smile fa-10x"></i>
-  <h1>Rejestracja zakończona</h1>
-  <a href="#" th:href="@{/}">Powrót do strony głównej</a>
+    <i class="fa-regular fa-face-smile fa-10x"></i>
+    <h1>Rejestracja zakończona</h1>
+    <a href="#" th:href="@{/}">Powrót do strony głównej</a>
 </div>
 </body>
+<script src="/js/main.js"></script>
 </html>
