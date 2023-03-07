@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nowe ogłoszenie</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}"/>
+</head>
+<body>
+<div class="container">
+    <h1 class="login-header">Nowe ogłoszenie</h1>
+    <i class="fa-solid fa-door-closed fa-10x door-icon"></i>
+    <form class="login-form" action="#" th:action="@{'/save'}" method="get" th:object="${newAdvertisement}">
+        <input name="title" placeholder="title" class="form-item" th:field="*{title}">
+        <input name="url" placeholder="url" class="form-item" th:field="*{url}">
+        <input name="description" placeholder="description" class="form-item" th:field="*{description}">
+        <input name="price" placeholder="price" class="form-item" th:field="*{price}">
+        <input name="category_id" placeholder="categoryId" class="form-item" th:field="*{category}">
+        <button type="submit" class="form-item">Dodaj ogłoszenie</button>
+    </form>
+</div>
+</body>
+</html>

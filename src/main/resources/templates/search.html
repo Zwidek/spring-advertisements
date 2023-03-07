@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pl"
+      th:lang="${#request.getParameter('lang') ne null? #request.getParameter('lang') : 'en'}"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel użytkownika</title>
+    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+</head>
+<body>
+
+<div class="secured-container">
+    <nav class="navbar">
+        <a href="http://localhost:8080/category?page=1" class="logo">
+            <i class="fa-brands fa-twitter"></i>
+            Ogłoszenia
+        </a>
+        <a class="login-button" sec:authorize="isAuthenticated()"
+           th:text="|Dodaj ogłoszenie|"
+           th:href="@{/add}">Dodaj ogłoszenie</a>
+
+        <form action="#" th:action="@{/search}" th:method="get">
+            <input type="text" name="title"/>
+            <input type="hidden" name="page" value="0"/>
+            <input type="submit" value="SEARCH"/>
+        </form>
+
+        <a class="login-button" sec:authorize="isAuthenticated()"
+           th:text="|Wyloguj się|"
+           th:href="@{/logout}">Wyloguj się</a>
+    </nav>
+    <aside class="categories">
+        <ul>
+            <li th:each="item: ${categories}">
+                <a th:href="'/category/' + ${item.getId() + '?page=1'}">
+                    <span th:text="${item.getName()}"></span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <main>
+        <th:block th:each="item: ${foundAdvertisements}">
+            <article class="item">
+
+                <form
+                        action="#" th:action="@{'secured/delete/{id}' (id=${item.getId()})}" th:method="get">
+                    <button id=trash-button type="submit" th:method="delete"><i class="fa-solid fa-trash"></i></button>
+                </form>
+                <a th:href="'/ad/' + ${item.getId()}">
+                    <h2 class="item-header" th:text="${item.getTitle()}"></h2>
+                </a>
+                <p class="item-details"
+                   th:text="'Dodał: ' + ${item.getUser().getUsername()} + '. W dniu: ' + ${item.getDateAdded()}"></p>
+                <a th:href="${'//'+item.getUrl()}" target="_blank" class="item-link"
+                   th:text="${item.getUrl()}"></a>
+                <p th:text="${#numbers.formatDecimal(item.getPrice(), 0, 'COMMA', 2, 'POINT')+ ' zł'}"></p>
+                <p th:text="${item.getDescription()}"></p>
+            </article>
+        </th:block>
+    </main>
+    <footer>Ogłoszenia Drobne</footer>
+</div>
+</body>
+
+<!--<form th:action="@{/change-password}" method="post">-->
+<!--    <input type="password" name="newPassword" placeholder="Nowe hasło">-->
+<!--    <button type="submit">Zmień</button>-->
+<!--</form>-->
+
+</html>

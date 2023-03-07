@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pl"
+      th:lang="${#request.getParameter('lang') ne null? #request.getParameter('lang') : 'en'}"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel użytkownika</title>
+    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="secured-container">
+    <nav class="navbar">
+        <a th:href="@{/category(size=${advertisements.size}, page=1)}">
+            <i class="fab fa-twitter fa-3x" style="color: coral;"></i>
+            OGŁOSZENIA
+        </a>
+        <a class="login-button" sec:authorize="isAuthenticated()"
+           th:text="|Dodaj ogłoszenie|"
+           th:href="@{/add}">Dodaj ogłoszenie
+        </a>
+        <form action="#" th:action="@{/search}" th:method="get">
+            <input type="text" name="title"/>
+            <input type="hidden" name="page" value="0"/>
+            <input type="submit" value="SEARCH"/>
+        </form>
+<!--        <div>-->
+<!--            <input type="radio" name="color-scheme" id="light-mode" value="light" checked>-->
+<!--            <label for="light-mode">Light mode</label>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <input type="radio" name="color-scheme" id="dark-mode" value="dark">-->
+<!--            <label for="dark-mode">Dark mode</label>-->
+<!--        </div>-->
+        <a class="login-button" sec:authorize="isAuthenticated()"
+           th:text="|Wyloguj się|"
+           th:href="@{/logout}">Wyloguj się
+        </a>
+    </nav>
+    <aside class="categories">
+        <ul>
+            <li th:each="item: ${categories}">
+                <a th:href="'/category/' + ${item.getId() + '?page=1'}">
+                    <span th:text="${item.getName()}"></span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+    <main>
+        <th:block th:each="item:${advertisements}">
+            <div>
+                <article class="item">
+                    <form
+                            action="#" th:action="@{'/delete/{id}' (id=${item.getId()})}" th:method="get">
+                        <button id=trash-button type="submit" th:method="delete"><i class="fa-solid fa-trash"></i>
+                        </button>
+                    </form>
+                    <a th:href="${item.getId()}">
+                        <h2 class="item-header" th:text="${item.getTitle()}"></h2>
+                    </a>
+                    <p class="item-details"
+                       th:text="'Dodał: ' + ${item.getUser().getUsername()} + '. W dniu: ' + ${item.getDateAdded()}"></p>
+                    <a th:href="${'//'+item.getUrl()}" target="_blank" class="item-link"
+                       th:text="${item.getUrl()}"></a>
+                    <p th:text="${#numbers.formatDecimal(item.getPrice(), 0, 'COMMA', 2, 'POINT')+ ' zł'}"></p>
+                    <p th:text="${item.getDescription()}"></p>
+                </article>
+            </div>
+        </th:block>
+    </main>
+    <div th:if="${advertisements.totalPages > 1}" class="pagination">
+        <a th:if="${advertisements.number >= 1}"
+           th:href="@{/category(size=${advertisements.size}, page=${advertisements.number -1} +1)}"
+           class="previous page-link">
+            Poprzednia Strona
+        </a>
+        <span th:each="pageNumber : ${pageNumbers}">
+    <a th:if="${pageNumber > 0}"
+       th:href="@{/category(size=${advertisements.size}, page=${pageNumber})}"
+       th:text="${pageNumber}"
+       th:class="${pageNumber==advertisements.number + 1} ? 'page-link active' : 'page-link'">
+    </a>
+  </span>
+        <a th:if="${advertisements.number < advertisements.totalPages - 1}"
+           th:href="@{/category(size=${advertisements.size}, page=${advertisements.number + 1} +1)}"
+           class="next page-link">
+            Następna Strona
+        </a>
+    </div>
+</div>
+
+<div>
+    <input type="radio" name="color-scheme" id="light-mode" value="light" checked>
+    <label for="light-mode">Light mode</label>
+</div>
+
+<div>
+    <input type="radio" name="color-scheme" id="dark-mode" value="dark">
+    <label for="dark-mode">Dark mode</label>
+</div>
+
+<footer>OGŁOSZENIA</footer>
+
+</body>
+<script src="/js/main.js"></script>
+</html>

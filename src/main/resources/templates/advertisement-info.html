@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>s</title>
+</head>
+<body>
+    <img width="200" th:src="@{'/img/' + ${advertisement.get().url} + '.jpg'}"/>
+    <p th:text="${advertisement.get().title}"></p>
+    <p th:text="${advertisement.get().description}"></p>
+    <p th:text="${advertisement.get().price}"></p>
+    <p th:text="${advertisement.get().category.getName()}"></p>
+    <p th:text="${advertisement.get().viewCounter}"></p>
+</body>
+</html>

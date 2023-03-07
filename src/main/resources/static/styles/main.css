@@ -1,0 +1,287 @@
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+.secured-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 32px;
+    align-items: center;
+}
+.lock-icon {
+    display: block;
+}
+.login-header,
+.lock-icon,
+.form-item {
+    text-align: center;
+}
+.form-item {
+    margin: 4px 0;
+    width: 100%;
+}
+.scaled-image {
+    max-width: 100%;
+}
+/* pozbywamy się podkreśleń linków */
+a {
+    text-decoration: none;
+}
+/* logo po lewej, przycisk logowania po prawej */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+}
+/* kolorowe logo */
+.logo {
+    color: #ff308d;
+    font-size: 2em;
+    font-weight: 400;
+}
+/* efekt przycisku logowania */
+.login-button {
+    background-color: #007AFF;
+    color: white;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    padding: 3px 16px;
+    line-height: 24px;
+    font-weight: 400;
+    letter-spacing: .1em;
+}
+/* po najechaniu na przycisk lekka przezroczystość */
+.login-button:hover {
+    opacity: 80%;
+}
+.categories a:hover,
+.categories a.active,
+.categories a.selected{
+    font-weight: bolder;
+    font-size: larger;
+}
+/* usuwamy domyślne style przeglądarki i dodajemy flexboxa,
+kafelki mają zajmować tyle samo miejsca */
+.categories > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+/* kafelki mają wypełniać całą przestrzeń i być lekko przezroczyste */
+.categories > ul > li {
+    flex-grow: 1;
+    padding: 0.5rem;
+    font-weight: 500;
+    border: 2px solid;
+    color: white;
+    opacity: 0.8;
+}
+/* po najechaniu na kafelek usuwamy przezroczystość */
+.categories > ul > li:hover {
+    opacity: 1;
+}
+/* wyśrodkowanie tekstu na kafelkach i zmiana koloru linków */
+.categories > ul > li > a {
+    color: inherit;
+    display: block;
+    text-align: center;
+}
+/* kolor kafelków */
+.categories > ul > li {
+    background-color: #5ad656;
+}
+/* kolor kafelków */
+.categories > ul > li:nth-child(3n) {
+    background-color: #a356d6;
+}
+.categories > ul > li:nth-child(3n+1) {
+    background-color: #56d6c7;
+}
+.categories > ul > li:nth-child(3n+2) {
+    background-color: #5ad656;
+}
+/* ramka i odstępy */
+.item {
+    border: 1px solid #BDBDBD;
+    border-radius: 4px;
+    margin-top: 10px;
+    padding: 16px;
+}
+.item-header {
+    margin: 0;
+}
+/* zmiana czcionki "Dodane przez..." */
+.item-details {
+    color: #8a7676;
+    font-size: 0.8rem;
+}
+/* zmiana koloru odnośnika i zawijanie, gdy zbyt długie */
+.item-link,
+.item-link:visited {
+    color: #007AFF;
+    word-wrap: break-word;
+}
+/* wyrównanie i większa czcionka */
+.item-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.2rem;
+}
+/* zmieniamy paragraf na element liniowy */
+.item-votes {
+    display: inline;
+    color: #007AFF;
+}
+/* nadpisanie domyślnych marginesów */
+.item-bar > p {
+    margin: 0 4px;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.light-mode {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.dark-mode {
+    background-color: #000000;
+    color: yellow;
+}
+
+/*@media (prefers-color-scheme: light) {*/
+/*    body {*/
+/*        font-family: 'Roboto', sans-serif;*/
+/*        background-color: #ffffff;*/
+/*        color: #000000;*/
+/*        font-weight: 300;*/
+/*    }*/
+/*}*/
+
+footer {
+    margin-top: 40px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    text-decoration-color: #757575;
+    font-weight: bold;
+}
+#trash-button
+{
+    float: right;
+}
+h2 {
+    color:dimgrey;
+}
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pagination .page-link {
+    color: #007bff;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.pagination .active {
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    cursor: default;
+}
+
+.pagination .previous,
+.pagination .next {
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.pagination .previous:hover,
+.pagination .next:hover {
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+}
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pagination .page-link {
+    color: #007bff;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.pagination .active {
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    cursor: default;
+}
+
+.pagination .previous,
+.pagination .next {
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.pagination .previous:hover,
+.pagination .next:hover {
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+}
+
+.pagination span {
+    display: flex;
+    align-items: center;
+}
+
+.pagination span a:first-child,
+.pagination span a:last-child {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .pagination {
+        flex-wrap: wrap;
+    }
+
+    .pagination .previous,
+    .pagination .next,
+    .pagination span a {
+        flex-basis: calc(50% - 0.5rem);
+        margin-top: 0.5rem;
+    }
+
+    .pagination span a:first-child,
+    .pagination span a:last-child {
+        display: inline-block;
+        flex-basis: 100%;
+        text-align: center;
+    }
+}
