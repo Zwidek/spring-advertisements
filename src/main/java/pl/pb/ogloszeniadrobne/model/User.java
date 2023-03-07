@@ -3,6 +3,7 @@ package pl.pb.ogloszeniadrobne.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -55,6 +56,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "user_role_id", referencedColumnName = "id")
     )
     private Set<UserRole> roles = new HashSet<>();
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     List<Advertisement> advertisements = new ArrayList<>();
 }

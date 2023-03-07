@@ -15,6 +15,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -83,5 +84,9 @@ public class UserService {
         User currentUser = userRepository.findByEmail(currentUsername).orElseThrow();
         String newPasswordHash = passwordEncoder.encode(newPassword);
         currentUser.setPassword(newPasswordHash);
+    }
+
+    public List<String> getAllUserNames() {
+        return userRepository.findAll().stream().map(User::getUsername).collect(Collectors.toList());
     }
 }

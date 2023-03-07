@@ -20,7 +20,8 @@
     <ul>
         <li th:each="email: ${userEmails}">
             <span th:text="${email}">jan@kowalski.com</span>
-            <a href="#" th:href="@{/admin/delete-user(email=${email})}">
+            <a href="#" th:href="@{/admin/delete-user(email=${email})}" style="color:red;">
+                <i class="fas fa-trash"></i>
                 Usuń
             </a>
         </li>

@@ -16,10 +16,19 @@
          class="scaled-image"
     />
     <ul style="list-style:none">
-        <li><a href="#" th:href="@{/category?page=1}">OGŁOSZENIA</a></li>
+        <li>
+            <a href="#" th:href="@{/category?page=1}">
+                <i class="fas fa-bullhorn"></i>
+                <span>OGŁOSZENIA</span>
+            </a>
+        </li>
         &nbsp;
-        <li><a href="#" th:href="@{/admin}">Panel admina</a></li>
-        &nbsp;
+        <li>
+            <a href="#" th:href="@{/admin}">
+                <i class="fas fa-cog"></i>
+                <span>Panel admina</span>
+            </a>
+        </li>
     </ul>
 </div>
 <script src="/js/main.js"></script>

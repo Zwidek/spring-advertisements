@@ -52,8 +52,8 @@
         <th:block th:each="item:${advertisements}">
             <div>
                 <article class="item">
-                    <form
-                            action="#" th:action="@{'/delete/{id}' (id=${item.getId()})}" th:method="get">
+                    <form th:if="${item.user.email == loggedInuser}"
+                        action="#" th:action="@{'/delete/{id}' (id=${item.getId()})}" th:method="get">
                         <button id=trash-button type="submit" th:method="delete"><i class="fa-solid fa-trash"></i>
                         </button>
                     </form>
@@ -90,10 +90,10 @@
         </a>
     </div>
 </div>
-<a href="/" class="btn btn-primary">
-    <i class="fas fa-arrow-left"></i> WRÓĆ NA STRONĘ GŁÓWNĄ
-</a>
-<footer>OGŁOSZENIA</footer>
 </body>
+<footer>OGŁOSZENIA</footer>
+<a href="/" class="btn btn-primary" style="position: fixed; bottom: 5%; height: 20pt">
+    <i class="fas fa-arrow-left"></i> WRÓĆ NA STRONĘ POCZĄTKOWĄ
+</a>
 <script src="/js/main.js"></script>
 </html>

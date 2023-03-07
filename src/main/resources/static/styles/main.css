@@ -387,3 +387,14 @@ h2 {
         font-weight: 300;
     }
 }
+
+ a {
+     color: #333;
+     font-family: Arial, sans-serif;
+     font-size: 16px;
+     text-decoration: none;
+ }
+a:hover {
+    color: #f00;
+    text-decoration: underline;
+}

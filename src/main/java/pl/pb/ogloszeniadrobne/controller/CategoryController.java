@@ -13,6 +13,7 @@ import pl.pb.ogloszeniadrobne.service.AdvertisementService;
 import pl.pb.ogloszeniadrobne.service.CategoryService;
 import pl.pb.ogloszeniadrobne.service.WelcomeMessageService;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -51,10 +52,13 @@ public class CategoryController {
 
     @GetMapping()
     public String home(Model model,
+                       Principal principal,
                        @RequestParam Optional<Integer> page,
                        @RequestParam Optional<Integer> size) {
         int currentPage = page.orElse(CURRENT_PAGE);
         int pageSize = size.orElse(PAGE_SIZE);
+        String loggedInUser = principal.getName();
+        model.addAttribute("loggedInuser", loggedInUser);
         Page<AdvertisementDto> advPage = advertisementService.getAllAdvertisements(PageRequest.of(currentPage - 1, pageSize));
         getPageAtributes(model, advPage);
         return "home";
