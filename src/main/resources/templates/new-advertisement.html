@@ -3,23 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Nowe ogłoszenie</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
+<div style="float: right" th:include="szablon/toggle-button"></div>
 <div class="container">
-    <h1 class="login-header">Nowe ogłoszenie</h1>
-    <i class="fa-solid fa-door-closed fa-10x door-icon"></i>
+    <i class="fas fa-plus"></i> Dodaj ogłoszenie
     <form class="login-form" action="#" th:action="@{'/save'}" method="get" th:object="${newAdvertisement}">
         <input name="title" placeholder="title" class="form-item" th:field="*{title}">
         <input name="url" placeholder="url" class="form-item" th:field="*{url}">
         <input name="description" placeholder="description" class="form-item" th:field="*{description}">
-        <input name="price" placeholder="price" class="form-item" th:field="*{price}">
-        <input name="category_id" placeholder="categoryId" class="form-item" th:field="*{category}">
+        <input name="price" placeholder="Cena" class="form-item" th:field="*{price}"/>
+        <select name="category_id" class="form-item" th:field="*{category}">
+            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">Wybierz
+                kategorię
+            </option>
+        </select>
         <button type="submit" class="form-item">Dodaj ogłoszenie</button>
+        <a href="http://localhost:8080/category?page=1" class="btn btn-primary">
+            <i class="fas fa-arrow-left"></i> WRÓĆ NA STRONĘ GŁÓWNĄ
+        </a>
     </form>
 </div>
 </body>
+
+<script src="/js/main.js"></script>
 </html>

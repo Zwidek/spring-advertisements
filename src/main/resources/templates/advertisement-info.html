@@ -2,14 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>s</title>
+    <title>advertisement-info</title>
+    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
-<body>
-    <img width="200" th:src="@{'/img/' + ${advertisement.get().url} + '.jpg'}"/>
-    <p th:text="${advertisement.get().title}"></p>
-    <p th:text="${advertisement.get().description}"></p>
-    <p th:text="${advertisement.get().price}"></p>
-    <p th:text="${advertisement.get().category.getName()}"></p>
-    <p th:text="${advertisement.get().viewCounter}"></p>
+<div style="float: right" th:include="szablon/toggle-button"></div>
+<body style="display: flex;   flex-direction: column; align-items: center;">
+<img width="200" th:src="@{'/img/' + ${advertisement.get().url} + '.jpg'}" alt="adv-image"/>
+<p th:text="'Nazwa: ' + ${advertisement.get().title}"></p>
+<p th:text="'Opis: ' + ${advertisement.get().description}"></p>
+<p th:text="'Cena: ' + ${#numbers.formatDecimal(advertisement.get().price, 0, 'COMMA', 2, 'POINT')+ ' zł'}"></p>
+<p th:text="'Kategoria: ' + ${advertisement.get().category.getName()}"></p>
+<p th:text="'ilość wyświetleń: ' + ${advertisement.get().viewCounter}"></p>
+<a href="/" class="btn btn-primary">
+    <i class="fas fa-arrow-left"></i> WRÓĆ NA STRONĘ GŁÓWNĄ
+</a>
 </body>
+<script src="/js/main.js"></script>
 </html>

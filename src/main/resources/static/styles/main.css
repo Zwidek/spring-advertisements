@@ -3,6 +3,7 @@
     margin: 0 auto;
     text-align: center;
 }
+
 .secured-container {
     max-width: 1200px;
     margin: auto;
@@ -14,25 +15,31 @@
     margin-top: 32px;
     align-items: center;
 }
+
 .lock-icon {
     display: block;
 }
+
 .login-header,
 .lock-icon,
 .form-item {
     text-align: center;
 }
+
 .form-item {
     margin: 4px 0;
     width: 100%;
 }
+
 .scaled-image {
     max-width: 100%;
 }
+
 /* pozbywamy się podkreśleń linków */
 a {
     text-decoration: none;
 }
+
 /* logo po lewej, przycisk logowania po prawej */
 .navbar {
     display: flex;
@@ -40,12 +47,14 @@ a {
     justify-content: space-between;
     padding: 16px 0;
 }
+
 /* kolorowe logo */
 .logo {
     color: #ff308d;
     font-size: 2em;
     font-weight: 400;
 }
+
 /* efekt przycisku logowania */
 .login-button {
     background-color: #007AFF;
@@ -57,16 +66,19 @@ a {
     font-weight: 400;
     letter-spacing: .1em;
 }
+
 /* po najechaniu na przycisk lekka przezroczystość */
 .login-button:hover {
     opacity: 80%;
 }
+
 .categories a:hover,
 .categories a.active,
-.categories a.selected{
+.categories a.selected {
     font-weight: bolder;
     font-size: larger;
 }
+
 /* usuwamy domyślne style przeglądarki i dodajemy flexboxa,
 kafelki mają zajmować tyle samo miejsca */
 .categories > ul {
@@ -77,6 +89,7 @@ kafelki mają zajmować tyle samo miejsca */
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
+
 /* kafelki mają wypełniać całą przestrzeń i być lekko przezroczyste */
 .categories > ul > li {
     flex-grow: 1;
@@ -86,30 +99,37 @@ kafelki mają zajmować tyle samo miejsca */
     color: white;
     opacity: 0.8;
 }
+
 /* po najechaniu na kafelek usuwamy przezroczystość */
 .categories > ul > li:hover {
     opacity: 1;
 }
+
 /* wyśrodkowanie tekstu na kafelkach i zmiana koloru linków */
 .categories > ul > li > a {
     color: inherit;
     display: block;
     text-align: center;
 }
+
 /* kolor kafelków */
 .categories > ul > li {
     background-color: #5ad656;
 }
+
 /* kolor kafelków */
 .categories > ul > li:nth-child(3n) {
     background-color: #a356d6;
 }
+
 .categories > ul > li:nth-child(3n+1) {
     background-color: #56d6c7;
 }
+
 .categories > ul > li:nth-child(3n+2) {
     background-color: #5ad656;
 }
+
 /* ramka i odstępy */
 .item {
     border: 1px solid #BDBDBD;
@@ -117,20 +137,24 @@ kafelki mają zajmować tyle samo miejsca */
     margin-top: 10px;
     padding: 16px;
 }
+
 .item-header {
     margin: 0;
 }
+
 /* zmiana czcionki "Dodane przez..." */
 .item-details {
     color: #8a7676;
     font-size: 0.8rem;
 }
+
 /* zmiana koloru odnośnika i zawijanie, gdy zbyt długie */
 .item-link,
 .item-link:visited {
     color: #007AFF;
     word-wrap: break-word;
 }
+
 /* wyrównanie i większa czcionka */
 .item-bar {
     display: flex;
@@ -138,11 +162,13 @@ kafelki mają zajmować tyle samo miejsca */
     align-items: center;
     font-size: 1.2rem;
 }
+
 /* zmieniamy paragraf na element liniowy */
 .item-votes {
     display: inline;
     color: #007AFF;
 }
+
 /* nadpisanie domyślnych marginesów */
 .item-bar > p {
     margin: 0 4px;
@@ -182,13 +208,15 @@ footer {
     text-decoration-color: #757575;
     font-weight: bold;
 }
-#trash-button
-{
+
+#trash-button {
     float: right;
 }
+
 h2 {
-    color:dimgrey;
+    color: dimgrey;
 }
+
 .pagination {
     display: flex;
     justify-content: space-between;
@@ -222,6 +250,7 @@ h2 {
     color: #fff;
     text-decoration: none;
 }
+
 .pagination {
     display: flex;
     justify-content: space-between;
@@ -284,4 +313,48 @@ h2 {
         flex-basis: 100%;
         text-align: center;
     }
+}
+
+.toggle-button input[type="checkbox"] {
+    display: none;
+}
+
+.toggle-button label {
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+    background-color: #999;
+    border-radius: 25px;
+    position: relative;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.toggle-button label i {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    color: #fff;
+    transition: opacity 0.3s;
+}
+
+.toggle-button label .fa-sun {
+    left: 10%;
+}
+
+.toggle-button label .fa-moon {
+    right: 10%;
+}
+
+.toggle-button input[type="checkbox"]:checked + label {
+    background-color: #444;
+}
+
+.toggle-button input[type="checkbox"]:checked + label .fa-sun {
+    opacity: 0;
+}
+
+.toggle-button input[type="checkbox"]:checked + label .fa-moon {
+    opacity: 1;
 }

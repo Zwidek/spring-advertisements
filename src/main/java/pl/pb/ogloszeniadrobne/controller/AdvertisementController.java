@@ -2,6 +2,7 @@ package pl.pb.ogloszeniadrobne.controller;
 
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pl.pb.ogloszeniadrobne.dto.AdvertisementDto;
 import pl.pb.ogloszeniadrobne.model.Advertisement;
@@ -30,27 +30,28 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping
-@AllArgsConstructor
 public class AdvertisementController {
-
     private final AdvertisementService advertisementService;
     private final AdvertisementRepository advertisementRepository;
+    private final CategoryService categoryService;
     private final UserRepository userRepository;
     private final UserService userService;
-    private ArrayList<String> forbiddenWords;
-    private final CategoryService categoryService;
+    private final ArrayList<String> forbiddenWords;
+
+    @Autowired
+    public AdvertisementController(AdvertisementService advertisementService, AdvertisementRepository advertisementRepository, CategoryService categoryService, UserRepository userRepository, UserService userService, ArrayList<String> forbiddenWords) {
+        this.advertisementService = advertisementService;
+        this.advertisementRepository = advertisementRepository;
+        this.categoryService = categoryService;
+        this.userRepository = userRepository;
+        this.userService = userService;
+        this.forbiddenWords = forbiddenWords;
+    }
 
     @GetMapping
     @ResponseBody
     Page<AdvertisementDto> getAllAdvertisements(Pageable pageable) {
         return advertisementService.getAllAdvertisements(pageable);
-    }
-
-    @GetMapping("/search")
-    String getAllAdvertisementsForThymeleaf(@RequestParam String title, @RequestParam int page, Model model) {
-        model.addAttribute("foundAdvertisements", advertisementService.getAdvertisementByTitle(title, page));
-        model.addAttribute("categories", categoryService.findAllCategories());
-        return "search";
     }
 
     @GetMapping("/{id}")
@@ -71,6 +72,7 @@ public class AdvertisementController {
     @GetMapping("/add")
     String addAdvertisementThymeleaf(Model model) {
         model.addAttribute("newAdvertisement", new Advertisement());
+        model.addAttribute("categories", categoryService.findAllCategories());
         return "new-advertisement";
     }
 
@@ -84,11 +86,11 @@ public class AdvertisementController {
         advertisement.setViewCounter(0L);
         for (String forbiddenWord : forbiddenWords) {
             if (advertisement.getDescription().contains(forbiddenWord))
-                return "Word forbidden";
+                return "word-forbidden";
         }
         for (String forbiddenWord : forbiddenWords) {
             if (advertisement.getTitle().contains(forbiddenWord))
-                return "Word forbidden";
+                return "word-forbidden";
         }
         advertisementRepository.save(advertisement);
         return "redirect:/uploadimage/" + advertisement.getId();

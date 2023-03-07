@@ -1,6 +1,6 @@
 package pl.pb.ogloszeniadrobne.service;
 
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -17,9 +17,13 @@ import java.util.Optional;
 import static pl.pb.ogloszeniadrobne.util.AdvertisementUtil.PAGE_SIZE;
 
 @Service
-@AllArgsConstructor
 public class AdvertisementService {
     private final AdvertisementRepository advertisementRepository;
+
+    @Autowired
+    public AdvertisementService(AdvertisementRepository advertisementRepository) {
+        this.advertisementRepository = advertisementRepository;
+    }
 
     public Page<AdvertisementDto> getAllAdvertisements(Pageable pageable) {
         int pageSize = pageable.getPageSize();
@@ -37,6 +41,14 @@ public class AdvertisementService {
         return getPageAttributes(pageSize, currentPage, startItem, advertisements);
     }
 
+    public Page<AdvertisementDto> getAdvertisementByTitle(String title, Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<AdvertisementDto> advertisements = advertisementRepository.findAdvertisementByTitle(title).stream().map(AdvertisementDtoMapper::mapper).toList();
+        return getPageAttributes(pageSize, currentPage, startItem, advertisements);
+    }
+
     public void deleteAdvertisement(Long id) {
         advertisementRepository.deleteById(id);
     }
@@ -49,23 +61,15 @@ public class AdvertisementService {
         return advertisementRepository.findById(id);
     }
 
-
-    public List<AdvertisementDto> getAdvertisementByTitle(String title, int page) {
-        return advertisementRepository.findAdvertisementByTitle(title, PageRequest.of(page, PAGE_SIZE)).stream().map(AdvertisementDtoMapper::mapper).toList();
-    }
-
     private Page<AdvertisementDto> getPageAttributes(int pageSize, int currentPage, int startItem, List<AdvertisementDto> advertisements) {
         List<AdvertisementDto> adv = null;
-
         if (advertisements.size() < startItem) {
             advertisements = Collections.emptyList();
         } else {
             int toIndex = Math.min(startItem + pageSize, advertisements.size());
             adv = advertisements.subList(startItem, toIndex);
         }
-
         assert adv != null;
-        return new PageImpl<>(adv, PageRequest.of(currentPage, PAGE_SIZE),
-                advertisements.size());
+        return new PageImpl<>(adv, PageRequest.of(currentPage, PAGE_SIZE), advertisements.size());
     }
 }

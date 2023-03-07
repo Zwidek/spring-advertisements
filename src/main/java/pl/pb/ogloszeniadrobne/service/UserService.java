@@ -21,6 +21,7 @@ import java.util.Optional;
 public class UserService {
     private static final String USER_ROLE = "USER";
     private static final String ADMIN_AUTHORITY = "ROLE_ADMIN";
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserRoleRepository userRoleRepository;
@@ -76,12 +77,11 @@ public class UserService {
                 .anyMatch(authority -> authority.getAuthority().equals(ADMIN_AUTHORITY));
     }
 
-
     @Transactional
     public void changeCurrentUserPassword(String newPassword) {
-        String currentUsername = SecurityContextHolder.getContext().getAuthentication().getName(); //1
-        User currentUser = userRepository.findByEmail(currentUsername).orElseThrow(); //2
-        String newPasswordHash = passwordEncoder.encode(newPassword); //3
-        currentUser.setPassword(newPasswordHash); //4
+        String currentUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+        User currentUser = userRepository.findByEmail(currentUsername).orElseThrow();
+        String newPasswordHash = passwordEncoder.encode(newPassword);
+        currentUser.setPassword(newPasswordHash);
     }
 }

@@ -3,17 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Strona główna</title>
-    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}" />
+    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
+<div style="float: right" th:include="szablon/toggle-button"></div>
 <div class="container">
-    <h1>Bezpieczna strona</h1>
+    <h1>OGŁOSZENIA</h1>
     <img src="../static/img/security-image.jpg" th:src="@{/img/security-image.jpg}"
-         alt="Bezpieczna strona"
+         alt="ogłoszenia"
          class="scaled-image"
     />
-    <a href="#" th:href="@{/category?page=1}">Zabezpieczona strona</a>
-    <a href="#" th:href="@{/admin}">Panel admina</a>
+    <ul style="list-style:none">
+        <li><a href="#" th:href="@{/category?page=1}">Zabezpieczona strona</a></li>
+        &nbsp;
+        <li><a href="#" th:href="@{/admin}">Panel admina</a></li>
+        &nbsp;
+        <li><a class="login-button" sec:authorize="isAuthenticated()"
+               th:text="|Wyloguj się|"
+               th:href="@{/logout}">Wyloguj się</a></li>
+    </ul>
+
+
 </div>
 </body>
+<script src="/js/main.js"></script>
 </html>

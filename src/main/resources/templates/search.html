@@ -12,23 +12,28 @@
     <!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 </head>
 <body>
-
+<div style="float: right" th:include="szablon/toggle-button"></div>
 <div class="secured-container">
     <nav class="navbar">
-        <a href="http://localhost:8080/category?page=1" class="logo">
-            <i class="fa-brands fa-twitter"></i>
-            Ogłoszenia
+        <a th:href="@{/category(size=${advertisements.size}, page=1)}">
+            <i class="fab fa-twitter fa-3x" style="color: coral;"></i>
+            OGŁOSZENIA
         </a>
         <a class="login-button" sec:authorize="isAuthenticated()"
            th:text="|Dodaj ogłoszenie|"
            th:href="@{/add}">Dodaj ogłoszenie</a>
-
-        <form action="#" th:action="@{/search}" th:method="get">
-            <input type="text" name="title"/>
-            <input type="hidden" name="page" value="0"/>
-            <input type="submit" value="SEARCH"/>
+        <form action="#" th:action="@{/search(size=${advertisements.size}, page=1)}" th:method="get">
+            <div class="input-group">
+                <input type="text" name="title" class="form-control" placeholder="Search"/>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i> SEARCH
+                    </button>
+                </div>
+                <input type="hidden" name="size" th:value="${advertisements.size}"/>
+                <input type="hidden" name="page" value="1"/>
+            </div>
         </form>
-
         <a class="login-button" sec:authorize="isAuthenticated()"
            th:text="|Wyloguj się|"
            th:href="@{/logout}">Wyloguj się</a>
@@ -42,11 +47,9 @@
             </li>
         </ul>
     </aside>
-
     <main>
-        <th:block th:each="item: ${foundAdvertisements}">
+        <th:block th:each="item: ${advertisements}">
             <article class="item">
-
                 <form
                         action="#" th:action="@{'secured/delete/{id}' (id=${item.getId()})}" th:method="get">
                     <button id=trash-button type="submit" th:method="delete"><i class="fa-solid fa-trash"></i></button>
@@ -63,6 +66,25 @@
             </article>
         </th:block>
     </main>
+    <div th:if="${advertisements.totalPages > 1}" class="pagination">
+        <a th:if="${advertisements.number >= 1}"
+           th:href="@{/search(title=${#httpServletRequest.getParameter('title')}, size=${advertisements.size}, page=${advertisements.number + 2})}"
+           class="previous page-link">
+            Poprzednia Strona
+        </a>
+        <span th:each="pageNumber : ${pageNumbers}">
+    <a th:if="${pageNumber > 0}"
+       th:href="@{/search(title=${#httpServletRequest.getParameter('title')}, size=${advertisements.size}, page=${advertisements.number + 2})}"
+       th:text="${pageNumber}"
+       th:class="${pageNumber==advertisements.number + 1} ? 'page-link active' : 'page-link'">
+    </a>
+  </span>
+        <a th:if="${advertisements.number < advertisements.totalPages - 1}"
+           th:href="@{/search(title=${#httpServletRequest.getParameter('title')}, size=${advertisements.size}, page=${advertisements.number + 2})}"
+           class="next page-link">
+            Następna Strona
+        </a>
+    </div>
     <footer>Ogłoszenia Drobne</footer>
 </div>
 </body>
@@ -71,5 +93,5 @@
 <!--    <input type="password" name="newPassword" placeholder="Nowe hasło">-->
 <!--    <button type="submit">Zmień</button>-->
 <!--</form>-->
-
+<script src="/js/main.js"></script>
 </html>

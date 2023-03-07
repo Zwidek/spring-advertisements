@@ -18,7 +18,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class Advertisement {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,20 +32,16 @@ public class Advertisement {
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
-
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "category_id")
     private Category category;
-
     @JsonProperty
     private String userName() {
         return user.getUsername();
     }
-
     @JsonProperty
     private String categoryName() {
         return category.getName();
     }
-
 }

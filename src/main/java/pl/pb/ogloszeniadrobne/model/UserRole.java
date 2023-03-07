@@ -11,12 +11,10 @@ import javax.persistence.*;
 @Setter
 @Table(name = "user_role")
 public class UserRole {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
     private String name;
     private String description;
-
 }

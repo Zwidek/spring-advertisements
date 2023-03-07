@@ -1,19 +1,15 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="https://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rejestracja zakończona</title>
+    <title>forbidden-words</title>
     <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
-<div th:include="szablon/toggle-button"></div>
-<div class="container">
-    <i class="fa-regular fa-face-smile fa-10x"></i>
-    <h1>Rejestracja zakończona</h1>
-    <a href="#" th:href="@{/}">Powrót do strony głównej</a>
-</div>
+<div style="float: right" th:include="szablon/toggle-button"></div>
+<h1>Podane słowo jest niewskazane</h1>
 </body>
 <script src="/js/main.js"></script>
 </html>

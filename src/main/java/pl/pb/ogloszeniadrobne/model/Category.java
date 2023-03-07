@@ -16,14 +16,12 @@ import java.util.List;
 @Getter
 @Setter
 public class Category {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
     private String name;
     private String description;
-
     @OneToMany(mappedBy = "category")
     List<Advertisement> categories = new ArrayList<>();
 }

@@ -24,7 +24,6 @@ import java.util.Set;
 @Setter
 @Table(name = "application_user")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
