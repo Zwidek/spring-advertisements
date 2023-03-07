@@ -1,29 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
 <div style="float: right" th:include="szablon/toggle-button"></div>
 <section class="my-5">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 mx-auto">
-        <h2>Upload Image Example</h2>
-        <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>
-        <form method="post" th:action="'/upload/' + ${advertisementId}" enctype="multipart/form-data">
-          <div class="form-group">
-            <input type="file" name="image" accept="image/*" class="form-control-file">
-          </div>
-          <button type="submit" class="btn btn-primary">Upload image</button>
-        </form>
-        <span th:if="${msg != null}" th:text="${msg}"></span>
-      </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h2>Dodawanie zdjęcia</h2>
+                <form method="post" th:action="'/upload/' + ${advertisementId}" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input type="file" name="image" accept="image/*" class="form-control-file" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-13 d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary">DODAJ</button>
+                            &nbsp;
+                            <ul style="list-style:none" class="d-flex justify-content-center align-items-center">
+                                <li>
+                                    <a th:href="'/' + ${advertisementId}" class="btn btn-danger color-inherit">
+                                        <i class="fas fa-times"></i> BEZ ZDJĘCIA
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 </body>
 <script src="/js/main.js"></script>

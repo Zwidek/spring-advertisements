@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="https://www.thymeleaf.org">
+<html lang="pl" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Strona główna</title>
@@ -16,17 +16,12 @@
          class="scaled-image"
     />
     <ul style="list-style:none">
-        <li><a href="#" th:href="@{/category?page=1}">Zabezpieczona strona</a></li>
+        <li><a href="#" th:href="@{/category?page=1}">OGŁOSZENIA</a></li>
         &nbsp;
         <li><a href="#" th:href="@{/admin}">Panel admina</a></li>
         &nbsp;
-        <li><a class="login-button" sec:authorize="isAuthenticated()"
-               th:text="|Wyloguj się|"
-               th:href="@{/logout}">Wyloguj się</a></li>
     </ul>
-
-
 </div>
-</body>
 <script src="/js/main.js"></script>
+</body>
 </html>

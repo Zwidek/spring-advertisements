@@ -34,18 +34,16 @@ public class UploadFileController {
     }
 
     @PostMapping("/upload/{id}")
-    public String uploadImage(Model model, @RequestParam("image") MultipartFile file, @PathVariable Long id) throws IOException {
-        StringBuilder fileNames = new StringBuilder();
-        Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, id + ".jpg");
-        fileNames.append(id).append(".jpg");
-        Files.write(fileNameAndPath, file.getBytes());
-        model.addAttribute("msg", "Uploaded images: " + fileNames);
-
+    public String uploadImage(@RequestParam("image") MultipartFile file, @PathVariable Long id) throws IOException {
         Optional<Advertisement> singleAdvertisement = advertisementService.getSingleAdvertisement(id);
-        singleAdvertisement.get().setUrl(String.valueOf(id));
+        if (file == null || file.isEmpty()) {
+            return "redirect:/" + singleAdvertisement.get().getId();
+        }
 
+        Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, id + ".jpg");
+        Files.write(fileNameAndPath, file.getBytes());
+        singleAdvertisement.get().setFilePath(String.valueOf(id));
         advertisementService.addAdvertisement(singleAdvertisement.get());
-
-        return "redirect:/category?page=1";
+        return "redirect:/" + singleAdvertisement.get().getId();
     }
 }

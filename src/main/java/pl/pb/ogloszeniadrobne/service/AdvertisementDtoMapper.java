@@ -20,7 +20,7 @@ public class AdvertisementDtoMapper {
                 .dateAdded(advertisement.getDateAdded())
                 .title(advertisement.getTitle())
                 .price(advertisement.getPrice())
-                .url(advertisement.getUrl())
+                .url(advertisement.getLinkUrl())
                 .description(advertisement.getDescription())
                 .build();
     }
