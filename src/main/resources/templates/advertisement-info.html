@@ -9,7 +9,9 @@
 </head>
 <div style="float: right" th:include="szablon/toggle-button"></div>
 <body style="display: flex;   flex-direction: column; align-items: center;">
-<img width="200" th:src="@{'/img/' + ${advertisement.get().url} + '.jpg'}" alt="adv-image"/>
+<div th:if="${advertisement.get().url != null && !advertisement.get().url.isEmpty()}">
+    <img width="200" th:src="@{'/img/' + ${advertisement.get().url} + '.jpg'}" alt="adv-image"/>
+</div>
 <p th:text="'Nazwa: ' + ${advertisement.get().title}"></p>
 <p th:text="'Opis: ' + ${advertisement.get().description}"></p>
 <p th:text="'Cena: ' + ${#numbers.formatDecimal(advertisement.get().price, 0, 'COMMA', 2, 'POINT')+ ' zł'}"></p>

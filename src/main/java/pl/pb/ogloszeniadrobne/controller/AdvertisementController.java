@@ -10,6 +10,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -77,7 +78,7 @@ public class AdvertisementController {
     }
 
     @GetMapping(path = "/save")
-    String saveAdvertisement(Advertisement advertisement, @AuthenticationPrincipal UserDetails currentUser) {
+    String saveAdvertisement(Advertisement advertisement, @AuthenticationPrincipal UserDetails currentUser, BindingResult bindingResult) {
         String username = currentUser.getUsername();
         Optional<User> byUsername = userRepository.findByEmail(username);
         advertisement.setUser(byUsername.get());
@@ -91,6 +92,10 @@ public class AdvertisementController {
         for (String forbiddenWord : forbiddenWords) {
             if (advertisement.getTitle().contains(forbiddenWord))
                 return "word-forbidden";
+        }
+        if (bindingResult.hasErrors()) {
+            // obsługa błędów walidacji
+            return "redirect:";
         }
         advertisementRepository.save(advertisement);
         return "redirect:/uploadimage/" + advertisement.getId();

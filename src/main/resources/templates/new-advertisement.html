@@ -12,11 +12,11 @@
 <div class="container">
     <i class="fas fa-plus"></i> Dodaj ogłoszenie
     <form class="login-form" action="#" th:action="@{'/save'}" method="get" th:object="${newAdvertisement}">
-        <input name="title" placeholder="title" class="form-item" th:field="*{title}">
-        <input name="url" placeholder="url" class="form-item" th:field="*{url}">
-        <input name="description" placeholder="description" class="form-item" th:field="*{description}">
-        <input name="price" placeholder="Cena" class="form-item" th:field="*{price}"/>
-        <select name="category_id" class="form-item" th:field="*{category}">
+        <input name="title" placeholder="title" class="form-item" th:field="*{title}" required>
+        <input name="url" placeholder="url" class="form-item" th:field="*{url}" required>
+        <input name="description" placeholder="description" class="form-item" th:field="*{description}" required>
+        <input name="price" placeholder="Cena" class="form-item" th:field="*{price}" required/>
+        <select name="category_id" class="form-item" th:field="*{category}" required>
             <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">Wybierz
                 kategorię
             </option>
