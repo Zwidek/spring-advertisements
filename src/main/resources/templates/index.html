@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="pl"
+      th:lang="${#request.getParameter('lang') ne null? #request.getParameter('lang') : 'en'}"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Strona główna</title>
@@ -30,8 +33,8 @@
             </a>
         </li>
         &nbsp;
-        <li>
-            <a class="login-button" sec:authorize="isAuthenticated()"
+        <li th:if="${authentication.principal != 'anonymousUser'}">
+            <a class="login-button"
                th:text="|Wyloguj się|"
                th:href="@{/logout}">Wyloguj się
             </a>
