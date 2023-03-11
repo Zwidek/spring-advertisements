@@ -14,7 +14,7 @@
 <div style="float: right" th:include="szablon/toggle-button"></div>
 <div class="secured-container">
     <nav class="navbar">
-        <a th:href="@{/category(size=${advertisements.size}, page=1)}">
+        <a th:href="@{/category(size=${advertisement.size}, page=1)}">
             <i class="fab fa-twitter fa-3x" style="color: coral;"></i>
             OGŁOSZENIA
         </a>
@@ -22,7 +22,7 @@
            th:text="|Dodaj ogłoszenie|"
            th:href="@{/add}">Dodaj ogłoszenie
         </a>
-        <form action="#" th:action="@{/search(size=${advertisements.size}, page=1)}" th:method="get">
+        <form action="#" th:action="@{/search(size=${advertisement.size}, page=1)}" th:method="get">
             <div class="input-group">
                 <input type="text" name="title" class="form-control" placeholder="Wpisz nazwę ogłoszenia"/>
                 <div class="input-group-append">
@@ -30,7 +30,7 @@
                         <i class="fas fa-search"></i> SZUKAJ
                     </button>
                 </div>
-                <input type="hidden" name="size" th:value="${advertisements.size}"/>
+                <input type="hidden" name="size" th:value="${advertisement.size}"/>
                 <input type="hidden" name="page" value="1"/>
             </div>
         </form>
@@ -41,7 +41,7 @@
     </nav>
     <aside class="categories">
         <ul>
-            <li th:each="item: ${categories}">
+            <li th:each="item: ${category}">
                 <a th:href="'/category/' + ${item.getId() + '?page=1'}">
                     <span th:text="${item.getName()}"></span>
                 </a>
@@ -49,7 +49,7 @@
         </ul>
     </aside>
     <main>
-        <th:block th:each="item:${advertisements}">
+        <th:block th:each="item:${advertisement}">
             <div>
                 <article class="item">
                     <form th:if="${item.user.email == loggedInuser}"
@@ -70,21 +70,21 @@
             </div>
         </th:block>
     </main>
-    <div th:if="${advertisements.totalPages > 1}" class="pagination">
-        <a th:if="${advertisements.number >= 1}"
-           th:href="@{/category(size=${advertisements.size}, page=${advertisements.number -1} +1)}"
+    <div th:if="${advertisement.totalPages > 1}" class="pagination">
+        <a th:if="${advertisement.number >= 1}"
+           th:href="@{/category(size=${advertisement.size}, page=${advertisement.number -1} +1)}"
            class="previous page-link">
             Poprzednia Strona
         </a>
         <span th:each="pageNumber : ${pageNumbers}">
     <a th:if="${pageNumber > 0}"
-       th:href="@{/category(size=${advertisements.size}, page=${pageNumber})}"
+       th:href="@{/category(size=${advertisement.size}, page=${pageNumber})}"
        th:text="${pageNumber}"
-       th:class="${pageNumber==advertisements.number + 1} ? 'page-link active' : 'page-link'">
+       th:class="${pageNumber==advertisement.number + 1} ? 'page-link active' : 'page-link'">
     </a>
   </span>
-        <a th:if="${advertisements.number < advertisements.totalPages - 1}"
-           th:href="@{/category(size=${advertisements.size}, page=${advertisements.number + 1} +1)}"
+        <a th:if="${advertisement.number < advertisement.totalPages - 1}"
+           th:href="@{/category(size=${advertisement.size}, page=${advertisement.number + 1} +1)}"
            class="next page-link">
             Następna Strona
         </a>

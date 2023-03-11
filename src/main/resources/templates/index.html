@@ -29,6 +29,13 @@
                 <span>Panel admina</span>
             </a>
         </li>
+        &nbsp;
+        <li>
+            <a class="login-button" sec:authorize="isAuthenticated()"
+               th:text="|Wyloguj się|"
+               th:href="@{/logout}">Wyloguj się
+            </a>
+        </li>
     </ul>
 </div>
 <script src="/js/main.js"></script>

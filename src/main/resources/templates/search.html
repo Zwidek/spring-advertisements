@@ -24,10 +24,10 @@
            th:href="@{/add}">Dodaj ogłoszenie</a>
         <form action="#" th:action="@{/search(size=${advertisements.size}, page=1)}" th:method="get">
             <div class="input-group">
-                <input type="text" name="title" class="form-control" placeholder="Search"/>
+                <input type="text" name="title" class="form-control" placeholder="Wpisz nazwę ogłoszenia"/>
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-search"></i> SEARCH
+                        <i class="fas fa-search"></i> SZUKAJ
                     </button>
                 </div>
                 <input type="hidden" name="size" th:value="${advertisements.size}"/>
@@ -88,10 +88,5 @@
     <footer>Ogłoszenia Drobne</footer>
 </div>
 </body>
-
-<!--<form th:action="@{/change-password}" method="post">-->
-<!--    <input type="password" name="newPassword" placeholder="Nowe hasło">-->
-<!--    <button type="submit">Zmień</button>-->
-<!--</form>-->
 <script src="/js/main.js"></script>
 </html>

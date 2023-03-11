@@ -10,7 +10,7 @@
 <div style="float: right" th:include="szablon/toggle-button"></div>
 <body style="display: flex;   flex-direction: column; align-items: center;">
 <div th:if="${advertisement.get().filePath != null and !advertisement.get().filePath.isEmpty()}">
-    <img width="200" th:src="@{'/img/' + ${advertisement.get().linkUrl} + '.jpg'}" alt="adv-image"/>
+    <img width="200" th:src="@{'/img/' + ${advertisement.get().filePath} + '.jpg'}" alt="adv-image"/>
 </div>
 <p th:text="'Nazwa: ' + ${advertisement.get().title}"></p>
 <p th:text="'Opis: ' + ${advertisement.get().description}"></p>
