@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
-<div style="float: right" th:include="szablon/toggle-button"></div>
+<div style="float: right" th:include="segments/toggle-button"></div>
 <body style="display: flex;   flex-direction: column; align-items: center;">
 <div th:if="${advertisement.get().filePath != null and !advertisement.get().filePath.isEmpty()}">
     <img width="200" th:src="@{'/img/' + ${advertisement.get().filePath} + '.jpg'}" alt="adv-image"/>
