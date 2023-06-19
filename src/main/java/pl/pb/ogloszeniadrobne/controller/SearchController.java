@@ -40,11 +40,6 @@ public class SearchController {
         int currentPage = page.orElse(CURRENT_PAGE);
         int pageSize = size.orElse(PAGE_SIZE);
         Page<AdvertisementDto> advPage = advertisementService.getAdvertisementByTitle(title, PageRequest.of(currentPage - 1, pageSize));
-        getPageAtributes(model, advPage);
-        return "search";
-    }
-
-    private void getPageAtributes(Model model, Page<AdvertisementDto> advPage) {
         model.addAttribute("categories", categoryService.findAllCategories());
         model.addAttribute("advertisements", advPage);
         int totalPages = advPage.getTotalPages();
@@ -54,5 +49,6 @@ public class SearchController {
                     .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
+        return "search";
     }
 }

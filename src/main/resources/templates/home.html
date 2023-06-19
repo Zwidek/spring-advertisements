@@ -11,10 +11,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
-
+<div style="float: right" th:include="segments/toggle-button"></div>
 <div class="secured-container">
     <nav class="navbar">
-        <a th:href="@{/category(size=${advertisements.size}, page=1)}">
+        <a th:href="@{/category(size=${advertisement.size}, page=1)}">
             <i class="fab fa-twitter fa-3x" style="color: coral;"></i>
             OGŁOSZENIA
         </a>
@@ -22,19 +22,18 @@
            th:text="|Dodaj ogłoszenie|"
            th:href="@{/add}">Dodaj ogłoszenie
         </a>
-        <form action="#" th:action="@{/search(size=${advertisements.size}, page=1)}" th:method="get">
+        <form action="#" th:action="@{/search(size=${advertisement.size}, page=1)}" th:method="get">
             <div class="input-group">
-                <input type="text" name="title" class="form-control" placeholder="Search"/>
+                <input type="text" name="title" class="form-control" placeholder="Wpisz nazwę ogłoszenia"/>
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-search"></i> SEARCH
+                        <i class="fas fa-search"></i> SZUKAJ
                     </button>
                 </div>
-                <input type="hidden" name="size" th:value="${advertisements.size}"/>
+                <input type="hidden" name="size" th:value="${advertisement.size}"/>
                 <input type="hidden" name="page" value="1"/>
             </div>
         </form>
-        <div th:include="szablon/toggle-button"></div>
         <a class="login-button" sec:authorize="isAuthenticated()"
            th:text="|Wyloguj się|"
            th:href="@{/logout}">Wyloguj się
@@ -42,7 +41,7 @@
     </nav>
     <aside class="categories">
         <ul>
-            <li th:each="item: ${categories}">
+            <li th:each="item: ${category}">
                 <a th:href="'/category/' + ${item.getId() + '?page=1'}">
                     <span th:text="${item.getName()}"></span>
                 </a>
@@ -50,11 +49,11 @@
         </ul>
     </aside>
     <main>
-        <th:block th:each="item:${advertisements}">
+        <th:block th:each="item:${advertisement}">
             <div>
                 <article class="item">
-                    <form
-                            action="#" th:action="@{'/delete/{id}' (id=${item.getId()})}" th:method="get">
+                    <form th:if="${item.user.email == loggedInuser}"
+                        action="#" th:action="@{'/delete/{id}' (id=${item.getId()})}" th:method="get">
                         <button id=trash-button type="submit" th:method="delete"><i class="fa-solid fa-trash"></i>
                         </button>
                     </form>
@@ -71,30 +70,30 @@
             </div>
         </th:block>
     </main>
-    <div th:if="${advertisements.totalPages > 1}" class="pagination">
-        <a th:if="${advertisements.number >= 1}"
-           th:href="@{/category(size=${advertisements.size}, page=${advertisements.number -1} +1)}"
+    <div th:if="${advertisement.totalPages > 1}" class="pagination">
+        <a th:if="${advertisement.number >= 1}"
+           th:href="@{/category(size=${advertisement.size}, page=${advertisement.number -1} +1)}"
            class="previous page-link">
             Poprzednia Strona
         </a>
         <span th:each="pageNumber : ${pageNumbers}">
     <a th:if="${pageNumber > 0}"
-       th:href="@{/category(size=${advertisements.size}, page=${pageNumber})}"
+       th:href="@{/category(size=${advertisement.size}, page=${pageNumber})}"
        th:text="${pageNumber}"
-       th:class="${pageNumber==advertisements.number + 1} ? 'page-link active' : 'page-link'">
+       th:class="${pageNumber==advertisement.number + 1} ? 'page-link active' : 'page-link'">
     </a>
   </span>
-        <a th:if="${advertisements.number < advertisements.totalPages - 1}"
-           th:href="@{/category(size=${advertisements.size}, page=${advertisements.number + 1} +1)}"
+        <a th:if="${advertisement.number < advertisement.totalPages - 1}"
+           th:href="@{/category(size=${advertisement.size}, page=${advertisement.number + 1} +1)}"
            class="next page-link">
             Następna Strona
         </a>
     </div>
+    <a href="/" class="btn btn-primary" style="position: relative; bottom: 5%; height: 20pt;">
+        <i class="fas fa-arrow-left"></i> WRÓĆ NA STRONĘ POCZĄTKOWĄ
+    </a>
 </div>
-<a href="/" class="btn btn-primary">
-    <i class="fas fa-arrow-left"></i> WRÓĆ NA STRONĘ GŁÓWNĄ
-</a>
-<footer>OGŁOSZENIA</footer>
 </body>
+<footer>OGŁOSZENIA</footer>
 <script src="/js/main.js"></script>
 </html>

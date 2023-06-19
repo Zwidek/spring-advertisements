@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="https://www.thymeleaf.org">
+<html lang="pl"
+      th:lang="${#request.getParameter('lang') ne null? #request.getParameter('lang') : 'en'}"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Strona główna</title>
@@ -8,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
-<div th:include="szablon/toggle-button"></div>
+<div style="float: right" th:include="segments/toggle-button"></div>
 <div class="container">
     <h1>OGŁOSZENIA</h1>
     <img src="../static/img/security-image.jpg" th:src="@{/img/security-image.jpg}"
@@ -16,17 +19,28 @@
          class="scaled-image"
     />
     <ul style="list-style:none">
-        <li><a href="#" th:href="@{/category?page=1}">Zabezpieczona strona</a></li>
+        <li>
+            <a href="#" th:href="@{/category?page=1}">
+                <i class="fas fa-bullhorn"></i>
+                <span>OGŁOSZENIA</span>
+            </a>
+        </li>
         &nbsp;
-        <li><a href="#" th:href="@{/admin}">Panel admina</a></li>
+        <li>
+            <a href="#" th:href="@{/admin}">
+                <i class="fas fa-cog"></i>
+                <span>Panel admina</span>
+            </a>
+        </li>
         &nbsp;
-        <li><a class="login-button" sec:authorize="isAuthenticated()"
+        <li th:if="${authentication.principal != 'anonymousUser'}">
+            <a class="login-button"
                th:text="|Wyloguj się|"
-               th:href="@{/logout}">Wyloguj się</a></li>
+               th:href="@{/logout}">Wyloguj się
+            </a>
+        </li>
     </ul>
-
-
 </div>
-</body>
 <script src="/js/main.js"></script>
+</body>
 </html>

@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/01-default-schema.sql
+  - include:
+      file: db/changelog/02-testdata.sql
+  - include:
+      file: db/changelog/03-testdata.sql

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pl"
+      th:lang="${#request.getParameter('lang') ne null? #request.getParameter('lang') : 'en'}"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>Error</title>
+</head>
+<body>
+<h1>Wystąpił błąd</h1>
+<p>Przepraszamy, ale wystąpił błąd podczas przetwarzania twojego żądania.</p>
+<p>Prosimy spróbować ponownie później.</p>
+<input type="hidden" name="size" th:value="${siema}"/>
+<div th:if="${errors != null}">
+  <h2>Błędy rejestracji:</h2>
+  <ul>
+    <li th:each="error : ${errors}" th:text="${error.defaultMessage}"></li>
+  </ul>
+</div>
+</body>
+</html>

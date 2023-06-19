@@ -12,7 +12,7 @@
     <!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 </head>
 <body>
-
+<div style="float: right" th:include="segments/toggle-button"></div>
 <div class="secured-container">
     <nav class="navbar">
         <a th:href="@{/category(size=${advertisements.size}, page=1)}">
@@ -24,17 +24,16 @@
            th:href="@{/add}">Dodaj ogłoszenie</a>
         <form action="#" th:action="@{/search(size=${advertisements.size}, page=1)}" th:method="get">
             <div class="input-group">
-                <input type="text" name="title" class="form-control" placeholder="Search"/>
+                <input type="text" name="title" class="form-control" placeholder="Wpisz nazwę ogłoszenia"/>
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-search"></i> SEARCH
+                        <i class="fas fa-search"></i> SZUKAJ
                     </button>
                 </div>
                 <input type="hidden" name="size" th:value="${advertisements.size}"/>
                 <input type="hidden" name="page" value="1"/>
             </div>
         </form>
-        <div th:include="szablon/toggle-button"></div>
         <a class="login-button" sec:authorize="isAuthenticated()"
            th:text="|Wyloguj się|"
            th:href="@{/logout}">Wyloguj się</a>

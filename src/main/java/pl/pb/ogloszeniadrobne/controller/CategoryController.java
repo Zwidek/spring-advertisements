@@ -1,17 +1,18 @@
 package pl.pb.ogloszeniadrobne.controller;
 
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.pb.ogloszeniadrobne.dto.AdvertisementDto;
 import pl.pb.ogloszeniadrobne.model.Category;
 import pl.pb.ogloszeniadrobne.service.AdvertisementService;
 import pl.pb.ogloszeniadrobne.service.CategoryService;
-import pl.pb.ogloszeniadrobne.service.WelcomeMessageService;
 
 import java.util.List;
 import java.util.Optional;
@@ -45,22 +46,6 @@ public class CategoryController {
         int currentPage = page.orElse(CURRENT_PAGE);
         int pageSize = size.orElse(PAGE_SIZE);
         Page<AdvertisementDto> advPage = advertisementService.getAllAdvertisementsByCategory(id, PageRequest.of(currentPage - 1, pageSize));
-        getPageAtributes(model, advPage);
-        return "category";
-    }
-
-    @GetMapping()
-    public String home(Model model,
-                       @RequestParam Optional<Integer> page,
-                       @RequestParam Optional<Integer> size) {
-        int currentPage = page.orElse(CURRENT_PAGE);
-        int pageSize = size.orElse(PAGE_SIZE);
-        Page<AdvertisementDto> advPage = advertisementService.getAllAdvertisements(PageRequest.of(currentPage - 1, pageSize));
-        getPageAtributes(model, advPage);
-        return "home";
-    }
-
-    private void getPageAtributes(Model model, Page<AdvertisementDto> advPage) {
         model.addAttribute("categories", findAllCategories());
         model.addAttribute("advertisements", advPage);
         int totalPages = advPage.getTotalPages();
@@ -70,5 +55,6 @@ public class CategoryController {
                     .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
+        return "category";
     }
 }

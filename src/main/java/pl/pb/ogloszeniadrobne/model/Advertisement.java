@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,11 +22,17 @@ public class Advertisement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     private String title;
-    private String url;
+    @NotNull
+    @Column(name = "url")
+    private String linkUrl;
+    @NotNull
     private double price;
+    @NotNull
     private String description;
     private Long viewCounter;
+    private String filePath;
     @Column(name = "date_added")
     private LocalDateTime dateAdded;
     @ManyToOne
